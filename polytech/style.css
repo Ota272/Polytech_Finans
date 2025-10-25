@@ -1,0 +1,759 @@
+/* --- Глобальные переменные и сброс --- */
+:root {
+    --bg-color: #f4f0e9; /* Бежевый фон, как на скриншотах игры */
+    --card-bg: #ffffff;
+    --text-dark: #333;
+    --text-light: #777;
+    --accent-blue: #007aff;
+    --accent-green: #34c759;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+    color: var(--text-dark);
+}
+
+.app-container {
+    max-width: 450px; /* Симулируем ширину телефона */
+    margin: 0 auto;
+    min-height: 100vh;
+    background-color: var(--card-bg); /* У главной страницы фон белый, как на скриншоте 1 */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* --- Стили для index.html --- */
+.main-header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.logo {
+    max-width: 200px;
+    margin-bottom: 30px;
+}
+
+.main-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.menu-card {
+    display: block;
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--text-dark);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    transition: transform 0.2s ease;
+    border: 1px solid #eee;
+    
+    /* Используем flex для позиционирования графики */
+    display: flex;
+    align-items: center;
+    min-height: 120px;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-image-container {
+    position: relative;
+    min-width: 120px; /* Фиксированная область для иконок */
+    height: 100px;
+    margin-right: 20px;
+}
+
+/* Позиционирование иконок как на макете */
+.card-icon-game,
+.card-icon-money {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    max-width: 90px;
+}
+
+.card-graphic-game {
+    position: absolute;
+    bottom: 0;
+    right: -10px;
+    max-width: 100px;
+    z-index: 1;
+    opacity: 0.9;
+}
+
+.card-graphic-money {
+     position: absolute;
+    bottom: -10px;
+    right: 0;
+    max-width: 90px;
+    z-index: 1;
+}
+
+
+.card-content h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+}
+
+.card-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+/* --- Стили для budget.html --- */
+
+/* Контейнер и экраны */
+#budget-app {
+    background-color: #f9f9f9; /* Слегка серый фон */
+    padding-bottom: 80px; /* Отступ для tab-bar */
+}
+
+.screen {
+    padding: 10px;
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.app-header h1 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+.app-header .logo-fin {
+    font-weight: bold;
+    background: #8e44ad; /* Фиолетовый, как на лого */
+    color: white;
+    padding: 5px 8px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+.app-header .header-icon {
+    font-size: 1.2rem;
+    color: var(--accent-blue);
+}
+
+/* Общие элементы */
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.btn-light {
+    background-color: #eef1f4;
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+.expense-color { color: #e74c3c; }
+.income-color { color: #2ecc71; }
+
+/* Экран Счета (screen-accounts) */
+.total-balance-card {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.total-balance-card .balance-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+.total-balance-card h2 {
+    font-size: 2.5rem;
+    margin: 5px 0 0 0;
+    color: var(--expense-color); /* По макету */
+}
+
+.account-card {
+    display: flex;
+    align-items: center;
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.account-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 15px;
+}
+.account-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.account-details span:first-child {
+    font-weight: 600;
+}
+.account-balance-list {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--expense-color);
+}
+.account-card .fa-chevron-right {
+    color: var(--text-light);
+    opacity: 0.5;
+}
+
+
+/* Экран Аналитика (screen-analytics) */
+.analytics-summary, .flow-summary, .categories-list {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+.analytics-summary .summary-item, .flow-summary .flow-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+.analytics-summary .summary-item:first-child {
+    border-bottom: 1px solid #f0f0f0;
+}
+.summary-item span:first-child, .flow-item span {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+.summary-item span:last-child, .flow-item span:last-child {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+.flow-item-balance span {
+    color: var(--text-dark);
+    font-size: 1rem;
+    font-weight: 600;
+}
+.flow-icon-income { color: var(--accent-green); }
+.flow-icon-expense { color: var(--expense-color); }
+
+h3 { font-size: 1.1rem; margin: 20px 0 10px 0; }
+
+.category-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+.category-icon { /* См. .account-icon, стили те же */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 15px;
+}
+.category-details {
+    flex-grow: 1;
+}
+.category-details span { font-weight: 600; }
+.category-percentage-bar {
+    height: 6px;
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    margin-top: 5px;
+}
+.category-percentage-bar div {
+    height: 100%;
+    background-color: var(--accent-blue);
+    border-radius: 3px;
+}
+.category-amount {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.category-amount span { font-weight: 600; }
+.category-amount small { font-size: 0.8rem; color: var(--text-light); }
+
+
+/* Экран Добавления (screen-add-tx) */
+.tx-type-switcher {
+    display: flex;
+    background-color: #eef1f4;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+.tx-type-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-light);
+    cursor: pointer;
+}
+.tx-type-btn.active {
+    background-color: var(--card-bg);
+    color: var(--text-dark);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tx-form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.tx-input-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.tx-input-area h1 {
+    font-size: 3.5rem;
+    margin: 0 0 0 10px;
+    min-height: 60px; /* Чтобы не прыгало при 0 */
+}
+.tx-input-area span {
+    font-size: 2rem;
+    color: var(--text-light);
+    margin-top: 10px; /* Выравнивание по h1 */
+}
+
+.tx-category-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 10px 15px;
+    width: 60%;
+    margin: 0 auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.tx-category-selector .category-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    margin-right: 10px;
+}
+.tx-category-selector select {
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 600;
+    flex-grow: 1;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    position: relative;
+}
+.keypad-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    color: var(--text-dark);
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.keypad-btn:hover {
+    background-color: #f0f0f0;
+}
+.keypad-icon {
+    font-size: 1.5rem;
+}
+.keypad-confirm-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--accent-green);
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+/* --- Нижний Tab Bar --- */
+.tab-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--card-bg);
+    border-top: 1px solid #f0f0f0;
+    padding: 5px 0;
+    
+    /* Обеспечиваем, чтобы он был поверх всего на мобильных */
+    max-width: 450px; 
+    left: 50%;
+    transform: translateX(-50%);
+}
+.tab-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    border: none;
+    color: var(--text-light);
+    font-size: 0.7rem;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.tab-btn i {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+.tab-btn.active {
+    color: var(--accent-blue);
+}
+/* --- Стили для game.html --- */
+#game-app {
+    background-color: var(--bg-color);
+    padding-bottom: 80px; /* Отступ для tab-bar */
+}
+
+/* Общие элементы игры */
+.game-screen {
+    padding: 10px;
+}
+.user-coin {
+    width: 30px;
+    height: 30px;
+    background-color: #f39c12;
+    border: 3px solid #e67e22;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    display: grid;
+    place-items: center;
+    font-style: italic;
+}
+.header-back-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    cursor: pointer;
+}
+
+/* Баннер */
+.promo-banner {
+    background: #1e1e2d; /* Темный фон баннера */
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
+}
+.banner-text h3 {
+    margin: 0 0 10px 0;
+}
+.promo-badge {
+    background-color: #f39c12;
+    color: var(--text-dark);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+.banner-graphic {
+    width: 100px;
+    position: absolute;
+    right: 10px;
+    top: -10px;
+}
+
+/* Карточки капитала */
+.card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.info-card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    position: relative; /* Для кота */
+}
+.info-card-rating {
+    background: linear-gradient(145deg, #feca57, #f39c12);
+    color: #4a2c00;
+}
+.card-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+.info-card-rating .card-label {
+    color: #8c5a02;
+}
+.card-value {
+    font-size: 1.25rem;
+    margin: 5px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card-dynamic {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+.rating-cat {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    width: 40px;
+}
+
+/* Блок "Инвестируйте" */
+.invest-block {
+    margin-bottom: 15px;
+}
+.invest-block h3 {
+    margin: 0 0 5px 0;
+}
+.invest-block .invest-subtext {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+.invest-subtext span {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+/* Сетка ассетов */
+.assets-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+}
+.asset-btn {
+    background-color: var(--card-bg);
+    border: 1px solid #eee;
+    border-radius: 16px;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.asset-btn img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+/* --- Стили для экранов Активов --- */
+.info-banner {
+    background-color: #fffbeb;
+    color: #b48700;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.asset-summary {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+.asset-summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.asset-summary-item span {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 5px;
+}
+.asset-summary-item strong {
+    font-size: 1.1rem;
+}
+
+.asset-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.asset-list-item {
+    display: flex;
+    align-items: center;
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+.asset-list-item img {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+}
+.asset-list-details {
+    flex-grow: 1;
+}
+.asset-list-details span {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.asset-list-details small {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+.asset-list-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.asset-list-price strong {
+    font-size: 1rem;
+}
+.asset-list-price span {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* --- Стили для экрана Депозита --- */
+.deposit-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 20px 0;
+}
+.deposit-form input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    box-sizing: border-box; /* Важно */
+    margin-bottom: 15px;
+}
+.btn-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.btn.btn-primary { background-color: var(--accent-blue); color: white; }
+.btn.btn-secondary { background-color: #eef1f4; color: var(--accent-blue); }
+.btn.btn-success { background-color: var(--accent-green); color: white; }
+.btn.btn-danger { background-color: var(--expense-color); color: white; }
+
+/* --- Стили для Модального окна --- */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: grid;
+    place-items: center;
+    z-index: 1000;
+}
+.modal-content {
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    padding: 20px;
+    width: 90%;
+    max-width: 350px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--text-light);
+    cursor: pointer;
+}
+.modal-content h3 {
+    margin-top: 0;
+}
+.modal-content h2 {
+    font-size: 2rem;
+    margin: 5px 0;
+}
+.modal-asset-dynamic {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.modal-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+.modal-info span { color: var(--text-light); }
+
+.modal-form {
+    margin: 20px 0;
+}
+.modal-form label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+.modal-form input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+.modal-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-top: 10px;
+}

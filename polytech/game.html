@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра - FinGram</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app-container" id="game-app">
+
+        <main class="game-screen" id="screen-game-main" style="display: block;">
+            <header class="app-header">
+            <span class="logo-fin">POLYT</span>
+                <h1>ГЛАВНАЯ</h1>
+                <div class="user-coin">PF</div>
+            </header>
+            
+            <div class="promo-banner">
+                <div class="banner-text">
+                    <h3>Торгуйте виртуальными акциями</h3>
+                    <span class="promo-badge">Без комиссий</span>
+                </div>
+                <img src="https://i.imgur.com/B9BwU9s.png" alt="0 percent" class="banner-graphic">
+            </div>
+
+            <div class="card-grid">
+                <div class="info-card">
+                    <span class="card-label">Ваш капитал</span>
+                    <h2 class="card-value" id="game-total-capital">$ 100 000,00</h2>
+                    <span class="card-dynamic income-color" id="game-capital-dynamic">↑ 0,00%</span>
+                </div>
+            </div>
+
+            <div class="invest-block">
+                <h3>Инвестируйте!</h3>
+                <span class="invest-subtext">Свободных средств: <span id="game-free-balance">$ 100 000,00</span></span>
+            </div>
+
+            <div class="assets-grid">
+                <button class="asset-btn" data-screen="screen-game-stocks">
+                    <img src="images/pngtree-business-stock-rate-3d-rendering-element-png-image_3272937.png" alt="Акции">
+                    <span>Акции</span>
+                </button>
+                <button class="asset-btn" data-screen="screen-game-crypto">
+                    <img src="https://i.imgur.com/zX7VqHl.png" alt="Крипта">
+                    <span>Крипта</span>
+                </button>
+                <button class="asset-btn" data-screen="screen-game-metals">
+                    <img src="https://i.imgur.com/D4J8n8M.png" alt="Металлы">
+                    <span>Металлы</span>
+                </button>
+                <button class="asset-btn" data-screen="screen-game-bonds">
+                    <img src="https://i.imgur.com/Y0BqQ2A.png" alt="Облигации">
+                    <span>Облигации</span>
+                </button>
+                <button class="asset-btn" data-screen="screen-game-deposit">
+                    <img src="https://i.imgur.com/8QjE7tN.png" alt="Депозит">
+                    <span>Депозит</span>
+                </button>
+                <button class="asset-btn" data-screen="screen-game-realty">
+                    <img src="https://i.imgur.com/l4Z2k7n.png" alt="Недвижимость">
+                    <span>Недвижимость</span>
+                </button>
+            </div>
+        </main>
+
+        <main class="game-screen" id="screen-game-stocks" style="display: none;">
+            <header class="app-header">
+                <button class="header-back-btn" data-screen="screen-game-main"><i class="fa-solid fa-chevron-left"></i></button>
+                <span class="logo-fin">POLYT</span>
+                <h1>АКТИВ</h1>
+                <div class="user-coin">PF</div>
+            </header>
+
+            <div class="asset-summary">
+                <div class="asset-summary-item">
+                    <span>Инвестировано</span>
+                    <strong id="stocks-invested">$ 0</strong>
+                </div>
+                <div class="asset-summary-item">
+                    <span>Динамика</span>
+                    <strong id="stocks-dynamic" class="expense-color">$ 0</strong>
+                </div>
+            </div>
+
+            <div class="asset-list" id="stocks-list-container">
+                </div>
+        </main>
+        
+        <main class="game-screen" id="screen-game-crypto" style="display: none;">
+             <header class="app-header">
+                <button class="header-back-btn" data-screen="screen-game-main"><i class="fa-solid fa-chevron-left"></i></button>
+                <span class="logo-fin">POLYT</span>
+                <h1>АКТИВ</h1>
+                <div class="user-coin">PF</div>
+            </header>
+            
+            <div class="asset-summary">
+                <div class="asset-summary-item">
+                    <span>Инвестировано</span>
+                    <strong id="crypto-invested">$ 0</strong>
+                </div>
+                <div class="asset-summary-item">
+                    <span>Динамика</span>
+                    <strong id="crypto-dynamic" class="expense-color">$ 0</strong>
+                </div>
+            </div>
+            
+            <h3>Крипта</h3>
+            <p>Вы можете покупать и продавать эти виртуальные валюты</p>
+
+            <div class="asset-list" id="crypto-list-container">
+                </div>
+        </main>
+
+        <main class="game-screen" id="screen-game-deposit" style="display: none;">
+             <header class="app-header">
+                <button class="header-back-btn" data-screen="screen-game-main"><i class="fa-solid fa-chevron-left"></i></button>
+                <span class="logo-fin">POLYT</span>
+                <h1>ДЕПОЗИТ</h1>
+                <div class="user-coin">PF</div>
+            </header>
+
+            <h3>Депозит USD</h3>
+            <p>Вы можете положить деньги на депозит под 1% годовых</p>
+
+            <div class="deposit-card">
+                 <div class="info-card">
+                    <span class="card-label">На депозите</span>
+                    <h2 class="card-value" id="deposit-balance">$ 0,00</h2>
+                </div>
+                 <div class="info-card">
+                    <span class="card-label">Начислено</span>
+                    <h2 class="card-value" id="deposit-earned">$ 0,00</h2>
+                    <img src="https://i.imgur.com/2mF1u4G.png" alt="Cat" class="rating-cat">
+                </div>
+            </div>
+            
+            <div class="deposit-form">
+                <input type="number" id="deposit-amount-input" placeholder="Укажите сумму">
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="deposit-add-btn">Внести</button>
+                    <button class="btn btn-secondary" id="deposit-withdraw-btn">Снять</button>
+                </div>
+            </div>
+        </main>
+
+        <main class="game-screen" id="screen-game-metals" style="display: none;">
+            <header class="app-header"><button class="header-back-btn" data-screen="screen-game-main"><i class="fa-solid fa-chevron-left"></i></button><h1>Металлы</h1></header>
+            <p>Страница в разработке</p>
+        </main>
+        <main class="game-screen" id="screen-game-bonds" style="display: none;">
+            <header class="app-header"><button class="header-back-btn" data-screen="screen-game-main"><i class="fa-solid fa-chevron-left"></i></button><h1>Облигации</h1></header>
+            <p>Страница в разработке</p>
+        </main>
+        <main class="game-screen" id="screen-game-realty" style="display: none;">
+            <header class="app-header"><button class="header-back-btn" data-screen="screen-game-main"><i class="fa-solid fa-chevron-left"></i></button><h1>Недвижимость</h1></header>
+            <p>Страница в разработке</p>
+        </main>
+
+
+        <footer class="tab-bar">
+            <button class="tab-btn" data-screen="screen-game-news">
+                <i class="fa-solid fa-newspaper"></i>
+                <span>Лента</span>
+            </button>
+            <button class="tab-btn" data-screen="screen-game-rating">
+                <i class="fa-solid fa-trophy"></i>
+                <span>Рейтинг</span>
+            </button>
+            <button class="tab-btn active" data-screen="screen-game-main">
+                <i class="fa-solid fa-house"></i>
+                <span>Главная</span>
+            </button>
+            <button class="tab-btn" data-screen="screen-game-portfolio">
+                <i class="fa-solid fa-briefcase"></i>
+                <span>Счета</span>
+            </button>
+            <button class="tab-btn" data-screen="screen-game-more">
+                <i class="fa-solid fa-ellipsis"></i>
+                <span>Еще</span>
+            </button>
+        </footer>
+
+        <div class="modal-backdrop" id="trade-modal" style="display: none;">
+            <div class="modal-content">
+                <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+                <h3 id="modal-asset-name">GOOG (Alphabet Inc.)</h3>
+                <h2 id="modal-asset-price">$ 251.34</h2>
+                <div class="modal-asset-dynamic expense-color" id="modal-asset-dynamic">-1.56%</div>
+                
+                <div class="modal-info">
+                    <span>Свободно:</span>
+                    <strong id="modal-free-balance">$ 100 000,00</strong>
+                </div>
+                <div class="modal-info">
+                    <span>В портфеле:</span>
+                    <strong id="modal-asset-owned">0 шт.</strong>
+                </div>
+                
+                <div class="modal-form">
+                    <label for="modal-amount-input">Количество:</label>
+                    <input type="number" id="modal-amount-input" placeholder="0.00" step="1">
+                    <div class="modal-total">
+                        <span>Итого:</span>
+                        <strong id="modal-total-price">$ 0.00</strong>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-success" id="modal-buy-btn">Купить</button>
+                    <button class="btn btn-danger" id="modal-sell-btn">Продать</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>

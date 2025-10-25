@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бюджет - FinGram</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app-container" id="budget-app">
+
+        <main class="screen" id="screen-accounts" style="display: block;">
+            <header class="app-header">
+                <span class="logo-fin">FIN</span>
+                <h1>Счета</h1>
+                <i class="fa-solid fa-arrow-right-from-bracket header-icon"></i>
+            </header>
+
+            <div class="banner-card">
+                </div>
+
+            <div class="total-balance-card">
+                <span class="balance-label">Общий баланс</span>
+                <h2 id="total-balance-accounts">0.00 ₸</h2>
+            </div>
+
+            <div class="account-list">
+                <div class="account-card">
+                    <div class="account-icon" style="background-color: #007aff;">H</div>
+                    <div class="account-details">
+                        <span>Наличка</span>
+                        <span class="account-balance-list" id="cash-balance">-5 000.00 ₸</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </div>
+            
+            <button class="btn btn-light" style="margin-top: 20px;">
+                <i class="fa-solid fa-plus"></i>
+                Добавить счет
+            </button>
+        </main>
+
+        <main class="screen" id="screen-analytics" style="display: none;">
+            <header class="app-header">
+                <h1>Аналитика</h1>
+            </header>
+            
+            <div class="analytics-summary">
+                <div class="summary-item">
+                    <span>За этот период</span>
+                    <span id="analytics-period-total">5 000,00 ₸</span>
+                </div>
+                <div class="summary-item">
+                    <span>В среднем в день</span>
+                    <span id="analytics-period-avg">227,27 ₸</span>
+                </div>
+            </div>
+
+            <h3>Категории</h3>
+            <div class="categories-list" id="analytics-categories">
+                <div class="category-item">
+                    <div class="category-icon" style="background-color: #007aff;">П</div>
+                    <div class="category-details">
+                        <span>Продукты</span>
+                        <div class="category-percentage-bar">
+                            <div style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <div class="category-amount">
+                        <span>5 000,00 ₸</span>
+                        <small>100,00%</small>
+                    </div>
+                </div>
+                </div>
+
+            <h3>Денежный поток</h3>
+            <div class="flow-summary">
+                <div class="flow-item">
+                    <i class="fa-solid fa-arrow-up flow-icon-income"></i>
+                    <span>Доходы</span>
+                    <span id="analytics-total-income">0,00 KZT</span>
+                </div>
+                <div class="flow-item">
+                    <i class="fa-solid fa-arrow-down flow-icon-expense"></i>
+                    <span>Расходы</span>
+                    <span id="analytics-total-expense">0,00 KZT</span>
+                </div>
+                <div class="flow-item flow-item-balance">
+                    <span>Баланс</span>
+                    <span id="analytics-total-balance" class="expense-color">0,00 KZT</span>
+                </div>
+            </div>
+        </main>
+        
+        <main class="screen" id="screen-add-tx" style="display: none;">
+            <header class="app-header-simple">
+                 </header>
+            <div class="tx-type-switcher">
+                <button class="tx-type-btn active" data-type="expense">Расход</button>
+                <button class="tx-type-btn" data-type="income">Доход</button>
+                <button class="tx-type-btn" data-type="transfer">Перевод</button>
+            </div>
+
+            <div class="tx-form">
+                <div class="tx-input-area">
+                    <span id="tx-currency">₸</span>
+                    <h1 id="tx-amount-display">0</h1>
+                </div>
+                <div class="tx-category-selector">
+                    <div class="category-icon" style="background-color: #007aff;">T</div>
+                    <select id="tx-category">
+                        <option value="Продукты">Продукты</option>
+                        <option value="Транспорт" selected>Транспорт</option>
+                        <option value="Развлечения">Развлечения</option>
+                        <option value="Доход">Доход (ЗП)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="keypad">
+                <button class="keypad-btn">1</button>
+                <button class="keypad-btn">2</button>
+                <button class="keypad-btn">3</button>
+                <button class="keypad-btn">4</button>
+                <button class="keypad-btn">5</button>
+                <button class="keypad-btn">6</button>
+                <button class="keypad-btn">7</button>
+                <button class="keypad-btn">8</button>
+                <button class="keypad-btn">9</button>
+                <button class="keypad-btn">.</button>
+                <button class="keypad-btn">0</button>
+                <button class="keypad-btn keypad-icon" id="keypad-backspace"><i class="fa-solid fa-delete-left"></i></button>
+            </div>
+            
+            <button class="keypad-confirm-btn" id="tx-confirm-btn">
+                <i class="fa-solid fa-check"></i>
+            </button>
+        </main>
+
+        <main class="screen" id="screen-limits" style="display: none;">
+            <header class="app-header"><h1>Лимиты</h1></header>
+            <p>Страница в разработке</p>
+        </main>
+        <main class="screen" id="screen-settings" style="display: none;">
+            <header class="app-header"><h1>Настройки</h1></header>
+            <p>Страница в разработке</p>
+        </main>
+
+
+        <footer class="tab-bar">
+            <button class="tab-btn" data-screen="screen-add-tx">
+                <i class="fa-solid fa-plus"></i>
+                <span>Добавить</span>
+            </button>
+            <button class="tab-btn active" data-screen="screen-accounts">
+                <i class="fa-solid fa-wallet"></i>
+                <span>Счета</span>
+            </button>
+            <button class="tab-btn" data-screen="screen-limits">
+                <i class="fa-solid fa-list-check"></i>
+                <span>Лимиты</span>
+            </button>
+            <button class="tab-btn" data-screen="screen-analytics">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Аналитика</span>
+            </button>
+            <button class="tab-btn" data-screen="screen-settings">
+                <i class="fa-solid fa-gear"></i>
+                <span>Настройки</span>
+            </button>
+        </footer>
+
+    </div>
+    
+    <script src="budget.js"></script>
+</body>
+</html>
